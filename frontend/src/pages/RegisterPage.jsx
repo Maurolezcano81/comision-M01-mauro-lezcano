@@ -130,9 +130,9 @@ const RegisterPage = () => {
             <>
                 <p className='p-3 hidden text-center w-full absolute t-0 text-white' id='mensajeFormulario'>{mensajeFormulario}</p>
 
-                <form onSubmit={handleForm} className='shadow-2xl bg-teal-900 w-screen h-screen flex justify-center items-center' method='post' action=''>
+                <div className='shadow-2xl bg-teal-900 w-screen h-screen flex justify-center items-center' >
 
-                    <div className='bg-gray-200 rounded p-2 bg-opacity-80'>
+                    <form onSubmit={handleForm}  method='post' action='' className='bg-gray-200 rounded p-2 bg-opacity-80'>
                         <div className='w-96 text-center text-xl'>
                             <h2>Registrar Usuario</h2>
                         </div>
@@ -169,9 +169,9 @@ const RegisterPage = () => {
 
 
                         </div>
-                    </div>
+                    </form>
 
-                </form>
+                </div>
             </>
 
         )
