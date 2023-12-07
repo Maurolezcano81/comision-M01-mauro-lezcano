@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 const LoginPage = () => {
 
+    const [mensajeFormulario, setmensajeFormulario] = useState('');
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-
-    // const [mensajeFormulario, setmensajeFormulario] = useState('');
 
     const changeUsername = (e) => {
         setUsername(e.target.value)
@@ -45,9 +45,57 @@ const LoginPage = () => {
             divErrorLogin.classList.add('hidden');
         }
 
+        try {
+
+            const response = await fetch('http://127.0.0.1:3000/api/signin',{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    inputLogin: username,
+                    password: password
+                })
+            })
 
 
-        
+            if(response.status === 403){
+                const data = await response.json();
+                const mensajeError = document.getElementById('mensajeFormulario');
+                setmensajeFormulario(data.message);
+                mensajeError.innerText = mensajeFormulario
+                mensajeError.classList.remove('hidden')
+                mensajeError.classList.add('bg-red-400')
+
+                setTimeout( () =>{
+                    mensajeError.classList.add('hidden');
+                },5000)
+            } else{
+                const data = await response.json();
+
+                const mensajeError = document.getElementById('mensajeFormulario');
+                setmensajeFormulario(data.message);
+                mensajeError.innerText = mensajeFormulario
+                mensajeError.classList.remove('hidden')
+                mensajeError.classList.add('bg-green-600');
+
+
+                // Utilizo LocalStorage para almacenar los datos de la Id del usuario y el token creado desde el servidor.
+                localStorage.setItem('idUsuario', data.usuario.id);
+                localStorage.setItem('token', data.tokenInUsuario);
+                localStorage.setItem('imgPerfil', data.usuario.imgPerfil);
+                localStorage.setItem('username', data.usuario.username);
+
+                
+                setTimeout( () =>{
+                    mensajeError.classList.add('hidden');
+                    location.href = '/'
+                },2000);
+            }
+
+        } catch(error){
+            console.error(error);
+        }
 
 
 
@@ -56,7 +104,7 @@ const LoginPage = () => {
     return (
 
         <>
-            {/* <p className='p-3 hidden text-center w-full absolute t-0 text-white' id='mensajeFormulario'>{mensajeFormulario}</p> */}
+            <p className='p-3 hidden text-center w-full absolute t-0 text-white' id='mensajeFormulario'>{mensajeFormulario}</p>
 
             <div className='shadow-2xl bg-teal-900 w-screen h-screen flex justify-center items-center' >
 

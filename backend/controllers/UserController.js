@@ -104,7 +104,7 @@ const signIn = async (req, res) => {
         const comprobarContrasena = await bcrypt.compare(password, consultarUsuarioExistente.password); // Comparo la contrasena del body de la peticion con el objeto que me devuelve las consultas anteriores
 
         if (!comprobarContrasena) {
-            return res.status(401).json({
+            return res.status(403).json({
                 message: 'Contrasena invalida'
             });
         } // Si no coinciden contrasenas
@@ -116,7 +116,9 @@ const signIn = async (req, res) => {
             message: 'Inicio de Sesion Exitoso',
             tokenInUsuario,
             usuario: {
-                id: consultarUsuarioExistente._id
+                id: consultarUsuarioExistente._id,
+                username: consultarUsuarioExistente.username,
+                imgPerfil: consultarUsuarioExistente.avatarUrl
             }
         }) // Envio los datos;
     } catch (error) {

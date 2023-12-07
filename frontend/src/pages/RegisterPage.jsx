@@ -78,6 +78,7 @@ const RegisterPage = () => {
 
         try {
 
+            // Peticion de inicio de sesion al servidor
             const response = await fetch('http://127.0.0.1:3000/api/signup', {
                 method: 'POST',
                 headers: {
@@ -92,7 +93,10 @@ const RegisterPage = () => {
             })
 
             if(response.ok){ // Aviso de solicitud creada exitosamente
+
+                // formateo la respuesta a json;
                 const data = await response.json();
+                
                 const mensajeModal = document.getElementById('mensajeFormulario');
                 mensajeModal.classList.add('bg-green-600');
                 mensajeModal.classList.remove('hidden')
@@ -102,7 +106,7 @@ const RegisterPage = () => {
 
                 setTimeout( ()=>{
                     mensajeModal.classList.add('hidden');
-                    window.location.href = '/signin';
+                    location.href = '/signin';
                 }, 2000)
 
             } else if(response.status === 403){ // Aviso de errores desde el lado del backend
