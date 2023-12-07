@@ -5,9 +5,7 @@ const Navbar = () =>{
 
     const avatar =localStorage.getItem('imgPerfil');
     const username = localStorage.getItem('username');
-    const token = localStorage.getItem('token');
-    const idUsuario = localStorage.getItem('idUsuario');
-    
+
     const botonCerrarSesion = document.getElementById('botonCerrarSesion');
 
     if(botonCerrarSesion){
@@ -22,7 +20,7 @@ const Navbar = () =>{
             <nav className="text-white bg-cyan-950 h-20 p-3 flex items-center justify-between shadow">
 
                 <div className="w-auto flex flex-row gap-5 justify-center items-center">
-                    <div className='w-20'>
+                    <div className='w-20 p-3'>
                         <img className='w-full border rounded-full' src={avatar} alt="avatar" />
                     </div>
                     <div className='w-1/2'>
