@@ -34,10 +34,57 @@ const crearPost = async (req, res) =>{
     } catch(error){
         console.error(error);
     }
-
 }
 
+const mostrarPosts = async (req, res)  =>{
 
+    try {
+        const mostrarPosts = await PostModel.find();
+
+        if(!mostrarPosts) {
+            res.status(403).json({
+                message: "Error al obtener los posts"
+            })
+        }
+
+
+        res.status(200).json({
+            message: "Posts obtenidos con exito",
+            mostrarPosts
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const eliminarPost = async (req, res) => {
+    const idPost = req.params.id
+    
+    try{
+
+        const postEliminado = await PostModel.findByIdAndDelete(idPost)
+
+        if(!postEliminado){
+            res.status(403).json({
+                message: "Error al eliminar el post"
+            })
+        }
+
+        res.status(200).json({
+            message: "Post eliminado exitosamente",
+            postEliminado
+        });
+
+    } catch(error){
+        console.error(error);
+    }
+}
+
+const editarPost = async (req, res) =>{
+    const idPost = req.params.id
+}
 module.exports = {
-    crearPost
+    crearPost,
+    mostrarPosts,
+    eliminarPost
 }
