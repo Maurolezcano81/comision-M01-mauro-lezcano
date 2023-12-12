@@ -13,13 +13,10 @@ const encriptarContrasena = async (password) => {
 }
 
 const generarToken = (datos) => {
-
     try {
-
-        const datosInToken = jwt.sign({
-            data: datos
-        }, process.env.JWT_TOKEN,
-            { expiresIn: '1h' }
+        const datosInToken = jwt.sign(
+            { data: datos },
+            process.env.TOKEN
         );
 
         return datosInToken;
@@ -84,15 +81,13 @@ const signIn = async (req, res) => {
             username: inputLogin
         }) // Consulto si existe usuario
 
-
-        if (!consultarUsuarioExistente) { // Si no existe usuario
-
+       if (!consultarUsuarioExistente) { // Si no existe usuario
             const consultarEmail = await UserModel.findOne({
                 email: inputLogin
             }) // Se consulta si hay algun email coincidente
 
             if (!consultarEmail) {
-                res.status(403).json({
+                return res.status(403).json({
                     message: 'Usuario o Email no validos'
                 })
             } // Si no se encuentra mail arroja error
