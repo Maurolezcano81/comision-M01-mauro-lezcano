@@ -57,6 +57,32 @@ const mostrarPosts = async (req, res)  =>{
     }
 }
 
+const mostrarPost = async (req, res) =>{
+
+    const idPost = req.params.id
+
+    try {
+        const post = await PostModel.findOne({
+            _id: idPost
+        })
+    
+        if(post){
+            res.status(200).json({
+                message: "Post obtenido con exito",
+                post
+            })
+        } else{
+            res.status(404).json({
+                message: "Este post no se ha encontrado"
+            })
+        }
+    } catch (error) {
+        console.error(error.name, error.message);
+    }
+
+    
+}
+
 const eliminarPost = async (req, res) => {
     const idPost = req.params.id
     
@@ -82,9 +108,52 @@ const eliminarPost = async (req, res) => {
 
 const editarPost = async (req, res) =>{
     const idPost = req.params.id
+
+    const { title, description, autor, imageUrl } = req.body;
+
+    try {
+        
+const postExistente = await PostModel.findById({
+        _id: idPost
+    })
+
+    if(!postExistente){
+        res.status(404).json({
+            message: 'Post no encontrado'
+        })
+    }
+
+    const datosActualizacion = {
+        title: title,
+        description: description,
+        autor: autor,
+        imageUrl: imageUrl,
+    }
+
+    const postEditado = await PostModel.findOneAndReplace({
+        _id: idPost,
+    }, datosActualizacion)
+
+    if(!postEditado){
+        res.status(403).json({
+            message: 'Error al editar el post'
+        })
+    }
+
+    res.status(200).json({
+        message: "Post editado correctamente",
+        postEditado
+    });
+
+    } catch (error) {
+        console.error(error.name, error.message);
+    }
+
 }
 module.exports = {
     crearPost,
     mostrarPosts,
-    eliminarPost
+    eliminarPost,
+    editarPost,
+    mostrarPost
 }
