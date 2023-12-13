@@ -39,7 +39,7 @@ const crearPost = async (req, res) =>{
 const mostrarPosts = async (req, res)  =>{
 
     try {
-        const mostrarPosts = await PostModel.find();
+        const mostrarPosts = await PostModel.find().populate('autor', 'username avatarUrl');
 
         if(!mostrarPosts) {
             res.status(403).json({
@@ -64,8 +64,7 @@ const mostrarPost = async (req, res) =>{
     try {
         const post = await PostModel.findOne({
             _id: idPost
-        })
-    
+        })    
         if(post){
             res.status(200).json({
                 message: "Post obtenido con exito",

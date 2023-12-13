@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 
-const CreatePost = () => {
+const EditPost = () => {
 
+    const { postId } = useParams();
     const apiUrl = import.meta.env.VITE_SV_URL;
 
     const [title, setTitle] = useState('');
@@ -163,4 +165,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default EditPost

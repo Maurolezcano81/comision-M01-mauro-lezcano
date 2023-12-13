@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 const RegisterPage = () => {
+    const apiUrl = import.meta.env.VITE_SV_URL;
 
     const [mensajeFormulario, setMensajeFormulario] = useState('');
 
@@ -79,7 +80,7 @@ const RegisterPage = () => {
         try {
 
             // Peticion de inicio de sesion al servidor
-            const response = await fetch('http://127.0.0.1:3000/api/signup', {
+            const response = await fetch(`${apiUrl}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

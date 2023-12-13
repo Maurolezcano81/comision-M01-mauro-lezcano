@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
+
 const LoginPage = () => {
+
+    const apiUrl = import.meta.env.VITE_SV_URL;
+    
 
     const [mensajeFormulario, setmensajeFormulario] = useState('');
 
@@ -47,7 +51,7 @@ const LoginPage = () => {
 
         try {
 
-            const response = await fetch('http://127.0.0.1:3000/api/signin',{
+            const response = await fetch(`${apiUrl}/signin`,{
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json',
