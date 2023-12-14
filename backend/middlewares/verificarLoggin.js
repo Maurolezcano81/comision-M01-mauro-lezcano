@@ -10,9 +10,10 @@ const verificarToken = (req, res, next) => {
     }
 
     try {
-        const verificacionToken = jwt.verify(token, process.env.TOKEN {
-            algorithm: "HS256",
-        });
+        // No pude continuar con la validacion del token por el backend, no pude encontrar una solucion
+        // pero tengo entendido que se hace de esta forma, el token llega bien como parametro pero simplemente me dice que es un token invalido
+        
+        // const verificacionToken = jwt.verify(token, process.env.TOKEN);
         req.usuario = verificacionToken;
         next();
     } catch (error) {

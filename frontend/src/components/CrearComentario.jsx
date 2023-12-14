@@ -10,6 +10,7 @@ const CrearComentario = () => {
     const [descriptionError, setDescriptionError] = useState('');
 
     const apiUrl = import.meta.env.VITE_SV_URL;
+    const token = localStorage.getItem('token');
 
     const handlerComment = (e) => {
         setDescription(e.target.value);
@@ -30,6 +31,7 @@ const CrearComentario = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` 
                 },
                 body: JSON.stringify({
                     autor: idUsuario,

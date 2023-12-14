@@ -61,7 +61,7 @@ const SinglePost = () => {
 
     return (
 
-        <div className='w-full pt-4 h-screen bg-teal-50'>
+        <div className='w-full py-4 min-h-screen h-auto bg-teal-50'>
             <BackButton url='/' />
             <div key={post._id} className="text-white p-5 rounded bg-gray-800 bg-opacity-50 w-1/2 my-0 mx-auto flex flex-col justify-center items-center">
                 {/* <CrearComentario /> */}

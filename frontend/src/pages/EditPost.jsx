@@ -4,7 +4,7 @@ import BackButton from '../components/BackButton';
 
 const EditPost = () => {
 
-    // const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const { postId } = useParams();
     const apiUrl = import.meta.env.VITE_SV_URL;
 
@@ -43,7 +43,7 @@ const EditPost = () => {
                     method: 'get',
                     headers:{
                         'Content-Type': 'application/json',
-                        // 'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 })
     
@@ -58,7 +58,7 @@ const EditPost = () => {
             }
         }
         postAEditar();
-    }, [apiUrl, postId])
+    }, [apiUrl, postId, token])
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -100,7 +100,7 @@ const EditPost = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     title: title,

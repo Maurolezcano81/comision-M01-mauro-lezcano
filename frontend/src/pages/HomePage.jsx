@@ -39,7 +39,7 @@ const HomePage = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        // 'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
 
@@ -57,7 +57,7 @@ const HomePage = () => {
 
         peticionPosts();
 
-    }, [apiUrl]);
+    }, [apiUrl, token]);
 
     const handleEditarPost = async (postId) => {
         window.location.href = `/edit/${postId}`;
@@ -111,7 +111,7 @@ const HomePage = () => {
             </div>  { /* Mensaje de Alerta */}
 
 
-            <div className="w-full h-auto bg-gray-100">
+            <div className="w-full min-h-screen h-auto bg-gray-100">
                 <Navbar />
 
                 <div className="w-full h-auto flex flex-wrap">
