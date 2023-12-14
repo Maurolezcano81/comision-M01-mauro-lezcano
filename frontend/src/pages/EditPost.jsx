@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 
 const EditPost = () => {
 
+    // const token = localStorage.getItem('token');
     const { postId } = useParams();
     const apiUrl = import.meta.env.VITE_SV_URL;
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+
+    const [post, setPost] = useState([]);
+
+    const [title, setTitle] = useState(post.title || '');
+    const [description, setDescription] = useState(post.description || '');
+    const [imageUrl, setImageUrl] = useState(post.imageUrl || '');
     const [mensajeFormulario, setMensajeFormulario] = useState('');
 
     const autor = localStorage.getItem('idUsuario');
@@ -30,6 +34,31 @@ const EditPost = () => {
         setImageUrl(e.target.value);
     }
 
+
+    useEffect ( () =>{
+        const postAEditar = async () =>{
+            
+            try {
+                const response = await fetch(`${apiUrl}/post/${postId}`,{
+                    method: 'get',
+                    headers:{
+                        'Content-Type': 'application/json',
+                        // 'Authorization': `Bearer ${token}`
+                    }
+                })
+    
+                if(response.ok){
+                    const data = await response.json();
+                    setPost(data.post);
+                } else{
+                    throw new Error('Error al obtener los datos')
+                }
+            } catch (error) {
+                console.error(error.name, error.message);
+            }
+        }
+        postAEditar();
+    }, [apiUrl, postId])
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -67,8 +96,8 @@ const EditPost = () => {
 
         try {
 
-            const response = await fetch(`${apiUrl}/post`, {
-                method: 'POST',
+            const response = await fetch(`${apiUrl}/post/${postId}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     // 'Authorization': `Bearer ${token}`,
@@ -118,6 +147,7 @@ const EditPost = () => {
 
     }
 
+
     return (
 
         <>
@@ -137,24 +167,24 @@ const EditPost = () => {
 
                         <div className='flex flex-col mt-5 px-4'>
                             <label htmlFor="title">Titulo:</label>
-                            <input onChange={changeTitle} className='text-black input p-1 rounded mt-1' type="text" name="title" id="title" />
+                            <input onChange={changeTitle} value={title} className='text-black input p-1 rounded mt-1' type="text" name="title" id="title" />
                             <p id='titleError' className='text-sm text-red-600 bg-red-200 mt-1 hidden'>{titleError}</p>
                         </div>
 
                         <div className='flex flex-col mt-5 px-4'>
                             <label htmlFor="description">Descripcion:</label>
-                            <textarea onChange={changeDescription} className='text-black input p-1 rounded mt-1' type="text" name="description" id="description" />
+                            <textarea onChange={changeDescription} value={description} className='text-black input p-1 rounded mt-1' type="text" name="description" id="description" />
                             <p id='descriptionError' className='text-sm text-red-600 bg-red-200 mt-1 hidden'>{descriptionError}</p>
                         </div>
 
                         <div className='flex flex-col mt-5 px-4'>
                             <label htmlFor="imageUrl">Url de imagen:</label>
-                            <input onChange={changeImageUrl} className='text-black input p-1 rounded mt-1' type="text" name="imageUrl" id="imageUrl" />
+                            <input onChange={changeImageUrl} value={imageUrl} className='text-black input p-1 rounded mt-1' type="text" name="imageUrl" id="imageUrl" />
                             <p id='imageUrlError' className='text-sm text-red-600 bg-red-200 mt-1 hidden'>{imageUrlError}</p>
                         </div>
 
                         <div className='w-96 text-center my-3'>
-                            <button type='submit' className='p-2 bg-blue-600 text-white rounded'>Crear Post</button>
+                            <button type='submit' className='p-2 bg-blue-600 text-white rounded'>Editar Post</button>
                         </div>
                     </div>
 

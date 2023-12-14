@@ -62,9 +62,10 @@ const mostrarPost = async (req, res) =>{
     const idPost = req.params.id
 
     try {
-        const post = await PostModel.findOne({
-            _id: idPost
-        })    
+        const post = await PostModel.findOne({ _id: idPost }).populate('autor', 'username avatarUrl').populate({
+            path: 'comments',
+            populate: { path: 'autor', select: 'username avatarUrl' }
+        });  
         if(post){
             res.status(200).json({
                 message: "Post obtenido con exito",

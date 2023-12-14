@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import CreatePost from './pages/CreatePost'
 import EditPost from './pages/EditPost'
+import SinglePost from './pages/SinglePost'
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/new/post' element={<CreatePost />} />
 
           <Route path='/edit/:postId' element={<EditPost />} />
+          <Route path='/post/:postId' element={<SinglePost />} />
 
         </Routes>
 

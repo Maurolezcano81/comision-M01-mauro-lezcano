@@ -61,12 +61,12 @@ const HomePage = () => {
 
     }, [apiUrl]);
 
-    const handleEditarPost = async () => {
-        console.log('hola E');
+    const handleEditarPost = async (postId) => {
+        window.location.href = `/edit/${postId}`;
     }
 
-    const handleVerMasPost = async () => {
-        console.log('hola E');
+    const handleVerMasPost = async (postId) => {
+        window.location.href = `/post/${postId}`;
     }
 
 

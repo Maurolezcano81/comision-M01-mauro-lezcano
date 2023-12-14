@@ -37,7 +37,7 @@ const anadirComentario = async (req, res) => {
     }
 }
 
-const eliminarComentario = async (req, res, next) => {
+const eliminarComentario = async (req, res) => {
     const { id } = req.params;
     try {
         const comentarioActual = await CommentModel.findOneAndDelete({ _id: id });
