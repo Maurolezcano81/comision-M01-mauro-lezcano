@@ -15,9 +15,11 @@ dotenv.config();
 // Rutas
 const UserRoute = require('./routes/UserRoute');
 const PostRoute = require('./routes/PostRoute');
+const CommentRoute = require('./routes/CommentRoute');
 
 app.use('/api', UserRoute);
 app.use('/api', PostRoute);
+app.use('/api', CommentRoute);
 
 app.listen( process.env.SV_PORT || 3000, () =>{
     console.log('Escuchando el puerto '+ process.env.SV_PORT);

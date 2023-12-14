@@ -2,7 +2,7 @@ const PostModel = require('../models/PostModel');
 const CommentModel = require('../models/CommentModel');
 
 const anadirComentario = async (req, res) => {
-    const { idPost } = req.params;
+    const { id } = req.params;
     const { autor, description } = req.body;
 
     try {
@@ -13,7 +13,7 @@ const anadirComentario = async (req, res) => {
 
 
         const postActual = await PostModel.findOne({
-            _id: idPost
+            _id: id
         });
 
 

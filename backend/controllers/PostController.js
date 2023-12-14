@@ -1,5 +1,6 @@
 const PostModel = require('../models/PostModel');
 
+
 const crearPost = async (req, res) =>{
     // Recibo por el cuerpo de la peticion los campos para crear un post
     const { title, description, autor, imageUrl } = req.body;
@@ -62,11 +63,13 @@ const mostrarPost = async (req, res) =>{
     const idPost = req.params.id
 
     try {
-        const post = await PostModel.findOne({ _id: idPost }).populate('autor', 'username avatarUrl').populate({
-            path: 'comments',
-            populate: { path: 'autor', select: 'username avatarUrl' }
-        });  
+        const post = await PostModel.findOne({ _id: idPost }).populate('autor', 'username avatarUrl')
+
         if(post){
+            await post.populate({
+                path: 'comments',
+                populate: { path: 'autor', select: 'username avatarUrl' }
+            })
             res.status(200).json({
                 message: "Post obtenido con exito",
                 post

@@ -12,9 +12,11 @@ const postSchema = mongoose.Schema({
         type: ObjectId,
         ref: 'User',
     },
-    comments: {
-        type: Array,
-    },
+    comments:
+        [{
+            type: ObjectId,
+            ref: 'Comment',
+        }],
     imageUrl: {
         type: String,
     }

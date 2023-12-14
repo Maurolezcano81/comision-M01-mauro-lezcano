@@ -9,8 +9,6 @@ const HomePage = () => {
     const idUsuario = localStorage.getItem('idUsuario');
     const token = localStorage.getItem('token');
 
-
-
     window.onload = () => {
         const alertaMensaje = document.getElementById('alertborder2');
         if (alertaMensaje) {
@@ -117,66 +115,66 @@ const HomePage = () => {
                 <Navbar />
 
                 <div className="w-full h-auto flex flex-wrap">
-                {Array.isArray(posts.mostrarPosts) && posts.mostrarPosts.length > 0 ? (
-                    posts.mostrarPosts.map(post => (
+                    {Array.isArray(posts.mostrarPosts) && posts.mostrarPosts.length > 0 ? (
+                        posts.mostrarPosts.map(post => (
 
-                        <div key={post._id} className="m-2 w-96 h-auto block bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                            <div className="flex items-center justify-center flex-col overflow-hidden bg-cover bg-no-repeat w-96  max-h-72">
-                                <img
-                                    className=" w-full"
-                                    src={post.imageUrl}
-                                    alt="" />
+                            <div key={post._id} className="m-2 w-96 h-auto block bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                                <div className="flex items-center justify-center flex-col overflow-hidden bg-cover bg-no-repeat w-96  max-h-72">
+                                    <img
+                                        className=" w-full"
+                                        src={post.imageUrl}
+                                        alt="" />
+                                </div>
+                                <div className="p-6">
+                                    <h5
+                                        className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                        {post.title}
+                                    </h5>
+                                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                        {post.description}
+                                    </p>
+                                    <p className="text-base text-neutral-600 dark:text-neutral-200">{post.autor?.username}</p>
+                                    <p className="text-base text-neutral-600 dark:text-neutral-200">
+                                        <small className="text-neutral-500 dark:text-neutral-400">{post.createdAt}</small>
+                                    </p>
+                                </div>
+
+                                <div className="flex w-full h-auto p-2 justify-between items-center">
+                                    {post.autor?._id === idUsuario && (
+                                        <>
+                                            <div>
+                                                <button onClick={() => handleEliminarPost(post._id)} className="mr-2 hover:text-red-400">
+                                                    <DeleteOutlineIcon />
+                                                </button>
+
+                                                <button onClick={() => handleEditarPost(post._id)} className="ml-2 hover:text-blue-400">
+                                                    <EditIcon />
+                                                </button>
+                                            </div>
+
+
+
+
+                                        </>
+                                    )}
+
+                                    <div>
+                                        <button onClick={() => handleVerMasPost(post._id)} className="mr-2 hover:text-white hover:bg-gray-700 p-2 rounded">
+                                            Ver Mas...
+                                            <ReadMoreIcon className="ml-2" />
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div className="p-6">
-                                <h5
-                                    className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                                    {post.title}
-                                </h5>
-                                <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                                    {post.description}
-                                </p>
-                                <p className="text-base text-neutral-600 dark:text-neutral-200">{post.autor?.username}</p>
-                                <p className="text-base text-neutral-600 dark:text-neutral-200">
-                                    <small className="text-neutral-500 dark:text-neutral-400">{post.createdAt}</small>
-                                </p>
-                            </div>
 
-                            <div className="flex w-full h-auto p-2 justify-between items-center">
-                                {post.autor?._id === idUsuario && (
-                                    <>
-                                        <div>
-                                            <button onClick={() => handleEliminarPost(post._id)} className="mr-2 hover:text-red-400">
-                                                <DeleteOutlineIcon />
-                                            </button>
+                        ))
+                    ) : (
+                        <p>No hay posts disponibles.</p>
+                    )}
+                </div >
+            </div>
 
-                                            <button onClick={() => handleEditarPost(post._id)} className="ml-2 hover:text-blue-400">
-                                                <EditIcon />
-                                            </button>
-                                        </div>
-
-
-                                        <div>
-                                            <button onClick={() => handleVerMasPost(post._id)} className="mr-2 hover:text-white hover:bg-gray-700 p-2 rounded">
-                                                Ver Mas...
-                                                <ReadMoreIcon className="ml-2" />
-                                            </button>
-                                        </div>
-
-                                    </>
-                                )}
-
-
-                            </div>
-
-                        </div>
-
-                    ))
-                ) : (
-                    <p>No hay posts disponibles.</p>
-                )}
-            </div >
-                </div>
-                
 
         </>
     )
