@@ -4,6 +4,8 @@ Este repositorio almacena los archivos del proyecto para la finalizacion del cur
 
 > **_NOTA:_**  SE HICIERON LAS CORRECCIONES MENCIONADAS. 14/12/2023
 
+> **_Segunda nota:_** En el historial de commits no quedo asentado todo el proceso de cambio realizado mas que nada de estilos, debido a que lo empece a desarrollar en un repositorio nuevo, despues de la primera entrega ya que no queria interrumpir en las correciones modificando el respositorio principal y luego hice un push de ese repositorio a el repositorio actual y no consegui traer el historial de commits.
+
 ## Instalación
 
 El proyecto se divide en 2 carpetas, sigue estos pasos para instalar y ejecutar el proyecto en tu entorno local:
