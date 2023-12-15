@@ -30,7 +30,7 @@ El proyecto se divide en 2 carpetas, sigue estos pasos para instalar y ejecutar 
     npm install
 5. Ejecuta la aplicacion:
     ```bash
-    node index.js
+    node main.js
 6. **Para iniciar el frontend** abrir una nueva terminal y navegar a la carpeta de frontend
     ```bash
     cd frontend
